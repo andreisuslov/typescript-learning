@@ -129,8 +129,9 @@ var CustomMap =
 /** @class */
 function () {
   // private means anyone else who's using this classs cannot reach the instance and try to handle it on google map
-  function CustomMap() {
-    this.googleMap = new google.maps.Map(document.getElementById('map'), {
+  function CustomMap(divId) {
+    // document.getElementById(divId) -> it is a reference to an html-element
+    this.googleMap = new google.maps.Map(document.getElementById(divId), {
       zoom: 1,
       center: {
         lat: 0,
@@ -138,6 +139,10 @@ function () {
       }
     });
   }
+
+  CustomMap.prototype.addUserMarker = function () {};
+
+  CustomMap.prototype.addCompanyMarker = function () {};
 
   return CustomMap;
 }();
@@ -157,7 +162,7 @@ var CustomMap_1 = require("./CustomMap"); // const user = new User();
 // console.log(company);
 
 
-new CustomMap_1.CustomMap();
+new CustomMap_1.CustomMap('map');
 },{"./CustomMap":"src/CustomMap.ts"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';

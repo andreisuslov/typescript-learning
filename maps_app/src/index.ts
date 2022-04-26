@@ -8,4 +8,4 @@ import { CustomMap } from './CustomMap';
 // const company = new Company();
 // console.log(company);
 
-new CustomMap();
+new CustomMap('map');
