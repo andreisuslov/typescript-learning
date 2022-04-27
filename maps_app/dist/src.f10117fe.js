@@ -136893,7 +136893,12 @@ function () {
       lat: parseFloat(faker_1.default.address.latitude()),
       lng: parseFloat(faker_1.default.address.longitude())
     };
-  }
+  } // adding this method to satisfy the Mappable interface
+
+
+  User.prototype.markerContent = function () {
+    return "User Name: ".concat(this.name); // using template string to inject this.name
+  };
 
   return User;
 }();
@@ -136925,7 +136930,12 @@ function () {
       lat: parseFloat(faker_1.default.address.latitude()),
       lng: parseFloat(faker_1.default.address.latitude())
     };
-  }
+  } // adding this method to satisfy the Mappable interface
+
+
+  Company.prototype.markerContent = function () {
+    return "\n        <div>\n            <h2>Company Name: ".concat(this.companyName, "</h2>\n            <h3>Catch Phrase: ").concat(this.catchPhrase, "</h3>\n        </div>\n        "); // using template string to inject this.companyName
+  };
 
   return Company;
 }();
@@ -136985,12 +136995,20 @@ function () {
 
 
   CustomMap.prototype.addMarker = function (mappable) {
-    new google.maps.Marker({
+    var _this = this;
+
+    var marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: mappable.location.lat,
         lng: mappable.location.lng
       }
+    });
+    marker.addListener('click', function () {
+      var infoWindow = new google.maps.InfoWindow({
+        content: mappable.markerContent()
+      });
+      infoWindow.open(_this.googleMap, marker);
     });
   };
 
@@ -137044,7 +137062,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56282" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59832" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

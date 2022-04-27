@@ -17,4 +17,14 @@ export class Company {
             lng: parseFloat(faker.address.latitude())
         };
     }
+
+    // adding this method to satisfy the Mappable interface
+    markerContent(): string {
+        return `
+        <div>
+            <h2>Company Name: ${this.companyName}</h2>
+            <h3>Catch Phrase: ${this.catchPhrase}</h3>
+        </div>
+        ` // using template string to inject this.companyName
+    }
 }

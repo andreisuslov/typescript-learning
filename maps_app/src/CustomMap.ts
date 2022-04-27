@@ -3,11 +3,14 @@
 // import { Company } from './Company';
 
 // Instructions to every other class on how they can ba an argumant to 'addMarker' method
-interface Mappable {
+export interface Mappable { // export statement allows other classes to access this interface and refer to it as a separate type 
     location: {
         lat: number;
         lng: number;
     };
+    // in order to be considered mappable, an object must have a property markerContent() that returns a string
+    markerContent(): string;
+
 }
 
 export class CustomMap {
@@ -58,12 +61,20 @@ export class CustomMap {
 
 // scalable solution of adding marker
 addMarker(mappable: Mappable): void {
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: mappable.location.lat,
         lng: mappable.location.lng,
       },
     });
+
+    marker.addListener('click', () => {
+        const infoWindow = new google.maps.InfoWindow({
+            content: mappable.markerContent(),
+        });
+
+        infoWindow.open(this.googleMap, marker);
+    })
   }
 }
