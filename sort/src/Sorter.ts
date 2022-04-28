@@ -8,13 +8,20 @@ interface Sortable {
 }
 
 /*
-Abstract classes ->
+Abstract class ->
+- Sets up a contract between different classes
 - Can't be used to create an object directly
-- Only used as a parent class
+- Only used as a parent class when we are trying to build up a definition of an object
 - Can contain real implementation for some methods
 - The implemented methods can refer to other methods that don't actually exist yet
 (we we still have to provide names and types for the un-implementer methods)
 - Can make child classes promise to implement some other method
+- Strongly couples classes together
+
+Interface class ->
+- Sets up a contract between different classes
+- Used when we have very different objects that we want to work together
+- Promotes loose coupling
 */
 
 export abstract class Sorter {
